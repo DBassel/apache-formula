@@ -3,7 +3,7 @@
 include:
   - apache
 
-mod-php5:
+mod-php5.6:
   pkg.installed:
     - name: {{ apache.mod_php5 }}
     - order: 180
@@ -11,12 +11,12 @@ mod-php5:
       - pkg: apache
 
 {% if grains['os_family']=="Debian" %}
-a2enmod php5:
+a2enmod php5.6:
   cmd.run:
     - unless: ls /etc/apache2/mods-enabled/php5.load
     - order: 225
     - require:
-      - pkg: mod-php5
+      - pkg: mod-php5.6
     - watch_in:
       - module: apache-restart
 
